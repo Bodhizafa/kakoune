@@ -1,3 +1,4 @@
+#include "hacks.hh"
 #include "assert.hh"
 
 #include "backtrace.hh"
@@ -7,7 +8,9 @@
 #include "debug.hh"
 
 #include <sys/types.h>
+#if !defined(_WIN32)
 #include <unistd.h>
+#endif
 
 namespace Kakoune
 {

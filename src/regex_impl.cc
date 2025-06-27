@@ -719,8 +719,18 @@ private:
         Vector<uint32_t> goto_inner_end_offsets;
         switch (node.op)
         {
-            case ParsedRegex::Literal:
-                push_inst(CompiledRegex::Literal, {.literal={.codepoint=ignore_case ? to_lower(node.value) : node.value, .ignore_case=ignore_case}});
+        case ParsedRegex::Literal: {
+            
+                CompiledRegex::Param param = {
+                    .literal = {
+                        .codepoint = ignore_case ? to_lower(node.value) : node.value,
+                    }
+                };
+                param.literal.ic.ignore_case = ignore_case;
+
+
+                push_inst(CompiledRegex::Literal, param);
+            }
                 break;
             case ParsedRegex::AnyChar:
                 push_inst(CompiledRegex::AnyChar);
@@ -1099,7 +1109,7 @@ String dump_regex(const CompiledRegex& program)
         switch (inst.op)
         {
             case CompiledRegex::Literal:
-                res += format("literal {}{}\n", inst.param.literal.ignore_case ? "(ignore case) " : "", inst.param.literal.codepoint);
+                res += format("literal {}{}\n", inst.param.literal.ic.ignore_case ? "(ignore case) " : "", inst.param.literal.codepoint);
                 break;
             case CompiledRegex::AnyChar:
                 res += "any char\n";

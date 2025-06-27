@@ -100,10 +100,12 @@ struct CompiledRegex : UseMemoryDomain<MemoryDomain::Regex>
 
     union Param
     {
-        struct Literal
-        {
+        union Literal {
             uint32_t codepoint : 24;
-            bool ignore_case : 1;
+            struct {
+                bool padding[3];
+                bool ignore_case;
+            } ic;
         } literal;
         int16_t character_class_index;
         CharacterType character_type;

@@ -1,3 +1,4 @@
+#include "hacks.hh"
 #include "completion.hh"
 #include "file.hh"
 #include "context.hh"
