@@ -6,12 +6,14 @@
 
 namespace Kakoune
 {
+/*
 namespace
 {
 // Avoid including all of <algorithm> just for this.
 constexpr auto max(auto lhs, auto rhs) { return lhs > rhs ? lhs : rhs;}
 constexpr auto min(auto lhs, auto rhs) { return lhs < rhs ? lhs : rhs;}
 }
+*/
 
 String::Data::Data(const char* data, size_t size, size_t capacity)
 {
@@ -20,8 +22,8 @@ String::Data::Data(const char* data, size_t size, size_t capacity)
         kak_assert(capacity <= Long::max_capacity);
         u.l.ptr = Alloc{}.allocate(capacity+1);
         u.l.size = size;
-        u.l.capacity = (capacity & Long::max_capacity);
-        u.l.mode = Long::active_mask;
+        u.l.cm.capacity = (capacity & Long::max_capacity);
+        u.l.cm.m.mode = Long::active_mask;
 
         if (data != nullptr)
             memcpy(u.l.ptr, data, size);
@@ -73,8 +75,8 @@ void String::Data::reserve(size_t new_capacity)
         return;
 
     kak_assert(new_capacity <= Long::max_capacity);
-    new_capacity = max(new_capacity, // Do not upgrade new_capacity to be over limit.
-                       min(current_capacity * 2, Long::max_capacity));
+    new_capacity = std::max(new_capacity, // Do not upgrade new_capacity to be over limit.
+                       std::min(current_capacity * 2, Long::max_capacity));
 
     char* new_ptr = Alloc{}.allocate(new_capacity+1);
     if (copy)
@@ -85,8 +87,8 @@ void String::Data::reserve(size_t new_capacity)
 
     u.l.size = size();
     u.l.ptr = new_ptr;
-    u.l.capacity = (new_capacity & Long::max_capacity);
-    u.l.mode = Long::active_mask;
+    u.l.cm.capacity = (new_capacity & Long::max_capacity);
+    u.l.cm.m.mode = Long::active_mask;
 }
 
 template void String::Data::reserve<true>(size_t);

@@ -1,6 +1,6 @@
 #ifndef units_hh_INCLUDED
 #define units_hh_INCLUDED
-
+#include "hacks.hh"
 #include "assert.hh"
 #include "hash.hh"
 
@@ -15,7 +15,7 @@ class StronglyTypedNumber
 public:
     StronglyTypedNumber() = default;
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr StronglyTypedNumber(ValueType value)
         : m_value(value)
     {
@@ -23,75 +23,75 @@ public:
                      "RealType is not derived from StronglyTypedNumber");
     }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr friend RealType operator+(RealType lhs, RealType rhs)
     { return RealType(lhs.m_value + rhs.m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr friend RealType operator-(RealType lhs, RealType rhs)
     { return RealType(lhs.m_value - rhs.m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr friend RealType operator*(RealType lhs, RealType rhs)
     { return RealType(lhs.m_value * rhs.m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr friend RealType operator/(RealType lhs, RealType rhs)
     { return RealType(lhs.m_value / rhs.m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator+=(RealType other)
     { m_value += other.m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator-=(RealType other)
     { m_value -= other.m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator*=(RealType other)
     { m_value *= other.m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator/=(RealType other)
     { m_value /= other.m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator++()
     { ++m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator--()
     { --m_value; return static_cast<RealType&>(*this); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType operator++(int)
     { RealType backup(static_cast<RealType&>(*this)); ++m_value; return backup; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType operator--(int)
     { RealType backup(static_cast<RealType&>(*this)); --m_value; return backup; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr RealType operator-() const { return RealType(-m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr friend RealType operator%(RealType lhs, RealType rhs)
     { return RealType(lhs.m_value % rhs.m_value); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     RealType& operator%=(RealType other)
     { m_value %= other.m_value; return static_cast<RealType&>(*this); }
 
     constexpr friend bool operator==(StronglyTypedNumber lhs, StronglyTypedNumber rhs) = default;
     constexpr friend auto operator<=>(StronglyTypedNumber lhs, StronglyTypedNumber rhs) = default;
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr bool operator!() const
     { return not m_value; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     explicit constexpr operator ValueType() const { return m_value; }
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     explicit constexpr operator bool() const { return m_value; }
 
     friend constexpr size_t hash_value(RealType val) { return hash_value(val.m_value); }
@@ -108,7 +108,7 @@ struct LineCount : public StronglyTypedNumber<LineCount, int>
     using StronglyTypedNumber::StronglyTypedNumber;
 };
 
-[[gnu::always_inline]]
+ALWAYS_INLINE
 inline constexpr LineCount operator""_line(unsigned long long int value)
 {
     return LineCount(value);
@@ -119,7 +119,7 @@ struct ByteCount : public StronglyTypedNumber<ByteCount, int>
     using StronglyTypedNumber::StronglyTypedNumber;
 };
 
-[[gnu::always_inline]]
+ALWAYS_INLINE
 inline constexpr ByteCount operator""_byte(unsigned long long int value)
 {
     return ByteCount(value);
@@ -134,7 +134,7 @@ struct CharCount : public StronglyTypedNumber<CharCount, int>
     using StronglyTypedNumber::StronglyTypedNumber;
 };
 
-[[gnu::always_inline]]
+ALWAYS_INLINE
 inline constexpr CharCount operator""_char(unsigned long long int value)
 {
     return CharCount(value);
@@ -145,7 +145,7 @@ struct ColumnCount : public StronglyTypedNumber<ColumnCount, int>
     using StronglyTypedNumber::StronglyTypedNumber;
 };
 
-[[gnu::always_inline]]
+ALWAYS_INLINE
 inline constexpr ColumnCount operator""_col(unsigned long long int value)
 {
     return ColumnCount(value);

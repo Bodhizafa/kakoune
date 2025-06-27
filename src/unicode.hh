@@ -99,6 +99,12 @@ inline bool is_identifier(Codepoint c) noexcept
            c == '_' or c == '-';
 }
 
+#if defined(_WIN32)
+inline ColumnCount codepoint_width(Codepoint c) noexcept
+{
+    return 1_col; // WINTODO - this is complicated in windows: https://stackoverflow.com/questions/9900399/windows-version-of-wcswidth-l
+}
+# else
 inline ColumnCount codepoint_width(Codepoint c) noexcept
 {
     if (c == '\n')
@@ -106,6 +112,7 @@ inline ColumnCount codepoint_width(Codepoint c) noexcept
     const auto width = wcwidth((wchar_t)c);
     return width >= 0 ? width : 1;
 }
+#endif
 
 enum class CharCategories
 {

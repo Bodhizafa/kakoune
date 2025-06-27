@@ -5,7 +5,7 @@
 
 #if defined(__GLIBC__) || defined(__APPLE__)
 # include <execinfo.h>
-#elif defined(__CYGWIN__)
+#elif defined(__CYGWIN__) || defined(_WIN32)
 # include <windows.h>
 # include <dbghelp.h>
 # include <stdio.h>

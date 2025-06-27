@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{97C201AF-BC17-B493-188A-6A1AB6C8759B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\alias_registry.cc" />
+    <ClCompile Include="src\assert.cc" />
+    <ClCompile Include="src\backtrace.cc" />
+    <ClCompile Include="src\buffer.cc" />
+    <ClCompile Include="src\buffer_manager.cc" />
+    <ClCompile Include="src\buffer_utils.cc" />
+    <ClCompile Include="src\changes.cc" />
+    <ClCompile Include="src\client.cc" />
+    <ClCompile Include="src\client_manager.cc" />
+    <ClCompile Include="src\color.cc" />
+    <ClCompile Include="src\commands.cc" />
+    <ClCompile Include="src\command_manager.cc" />
+    <ClCompile Include="src\completion.cc" />
+    <ClCompile Include="src\context.cc" />
+    <ClCompile Include="src\debug.cc" />
+    <ClCompile Include="src\display_buffer.cc" />
+    <ClCompile Include="src\env_vars.cc" />
+    <ClCompile Include="src\event_manager.cc" />
+    <ClCompile Include="src\exception.cc" />
+    <ClCompile Include="src\face_registry.cc" />
+    <ClCompile Include="src\file.cc" />
+    <ClCompile Include="src\format.cc" />
+    <ClCompile Include="src\hash.cc" />
+    <ClCompile Include="src\hash_map.cc" />
+    <ClCompile Include="src\highlighter.cc" />
+    <ClCompile Include="src\highlighters.cc" />
+    <ClCompile Include="src\highlighter_group.cc" />
+    <ClCompile Include="src\hook_manager.cc" />
+    <ClCompile Include="src\input_handler.cc" />
+    <ClCompile Include="src\insert_completer.cc" />
+    <ClCompile Include="src\json.cc" />
+    <ClCompile Include="src\json_ui.cc" />
+    <ClCompile Include="src\keymap_manager.cc" />
+    <ClCompile Include="src\keys.cc" />
+    <ClCompile Include="src\line_modification.cc" />
+    <ClCompile Include="src\main.cc" />
+    <ClCompile Include="src\memory.cc" />
+    <ClCompile Include="src\normal.cc" />
+    <ClCompile Include="src\option_manager.cc" />
+    <ClCompile Include="src\option_types.cc" />
+    <ClCompile Include="src\parameters_parser.cc" />
+    <ClCompile Include="src\ranges.cc" />
+    <ClCompile Include="src\ranked_match.cc" />
+    <ClCompile Include="src\regex.cc" />
+    <ClCompile Include="src\regex_impl.cc" />
+    <ClCompile Include="src\register_manager.cc" />
+    <ClCompile Include="src\remote.cc" />
+    <ClCompile Include="src\scope.cc" />
+    <ClCompile Include="src\selection.cc" />
+    <ClCompile Include="src\selectors.cc" />
+    <ClCompile Include="src\shared_string.cc" />
+    <ClCompile Include="src\shell_manager.cc" />
+    <ClCompile Include="src\string.cc" />
+    <ClCompile Include="src\string_utils.cc" />
+    <ClCompile Include="src\terminal_ui.cc" />
+    <ClCompile Include="src\unit_tests.cc" />
+    <ClCompile Include="src\window.cc" />
+    <ClCompile Include="src\word_db.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\alias_registry.hh" />
+    <ClInclude Include="src\array.hh" />
+    <ClInclude Include="src\array_view.hh" />
+    <ClInclude Include="src\assert.hh" />
+    <ClInclude Include="src\backtrace.hh" />
+    <ClInclude Include="src\buffer.hh" />
+    <ClInclude Include="src\buffer.inl.hh" />
+    <ClInclude Include="src\buffer_manager.hh" />
+    <ClInclude Include="src\buffer_utils.hh" />
+    <ClInclude Include="src\changes.hh" />
+    <ClInclude Include="src\client.hh" />
+    <ClInclude Include="src\client_manager.hh" />
+    <ClInclude Include="src\clock.hh" />
+    <ClInclude Include="src\color.hh" />
+    <ClInclude Include="src\commands.hh" />
+    <ClInclude Include="src\command_manager.hh" />
+    <ClInclude Include="src\completion.hh" />
+    <ClInclude Include="src\context.hh" />
+    <ClInclude Include="src\coord.hh" />
+    <ClInclude Include="src\debug.hh" />
+    <ClInclude Include="src\diff.hh" />
+    <ClInclude Include="src\display_buffer.hh" />
+    <ClInclude Include="src\enum.hh" />
+    <ClInclude Include="src\env_vars.hh" />
+    <ClInclude Include="src\event_manager.hh" />
+    <ClInclude Include="src\exception.hh" />
+    <ClInclude Include="src\face.hh" />
+    <ClInclude Include="src\face_registry.hh" />
+    <ClInclude Include="src\file.hh" />
+    <ClInclude Include="src\flags.hh" />
+    <ClInclude Include="src\format.hh" />
+    <ClInclude Include="src\hacks.hh" />
+    <ClInclude Include="src\hash.hh" />
+    <ClInclude Include="src\hash_map.hh" />
+    <ClInclude Include="src\highlighter.hh" />
+    <ClInclude Include="src\highlighters.hh" />
+    <ClInclude Include="src\highlighter_group.hh" />
+    <ClInclude Include="src\hook_manager.hh" />
+    <ClInclude Include="src\input_handler.hh" />
+    <ClInclude Include="src\insert_completer.hh" />
+    <ClInclude Include="src\json.hh" />
+    <ClInclude Include="src\json_ui.hh" />
+    <ClInclude Include="src\keymap_manager.hh" />
+    <ClInclude Include="src\keys.hh" />
+    <ClInclude Include="src\line_modification.hh" />
+    <ClInclude Include="src\memory.hh" />
+    <ClInclude Include="src\meta.hh" />
+    <ClInclude Include="src\normal.hh" />
+    <ClInclude Include="src\option.hh" />
+    <ClInclude Include="src\optional.hh" />
+    <ClInclude Include="src\option_manager.hh" />
+    <ClInclude Include="src\option_types.hh" />
+    <ClInclude Include="src\parameters_parser.hh" />
+    <ClInclude Include="src\profile.hh" />
+    <ClInclude Include="src\range.hh" />
+    <ClInclude Include="src\ranges.hh" />
+    <ClInclude Include="src\ranked_match.hh" />
+    <ClInclude Include="src\ref_ptr.hh" />
+    <ClInclude Include="src\regex.hh" />
+    <ClInclude Include="src\regex_impl.hh" />
+    <ClInclude Include="src\register_manager.hh" />
+    <ClInclude Include="src\remote.hh" />
+    <ClInclude Include="src\safe_ptr.hh" />
+    <ClInclude Include="src\scope.hh" />
+    <ClInclude Include="src\selection.hh" />
+    <ClInclude Include="src\selectors.hh" />
+    <ClInclude Include="src\shared_string.hh" />
+    <ClInclude Include="src\shell_manager.hh" />
+    <ClInclude Include="src\string.hh" />
+    <ClInclude Include="src\string_utils.hh" />
+    <ClInclude Include="src\terminal_ui.hh" />
+    <ClInclude Include="src\unicode.hh" />
+    <ClInclude Include="src\unique_descriptor.hh" />
+    <ClInclude Include="src\units.hh" />
+    <ClInclude Include="src\unit_tests.hh" />
+    <ClInclude Include="src\user_interface.hh" />
+    <ClInclude Include="src\utf8.hh" />
+    <ClInclude Include="src\utf8_iterator.hh" />
+    <ClInclude Include="src\utils.hh" />
+    <ClInclude Include="src\value.hh" />
+    <ClInclude Include="src\vector.hh" />
+    <ClInclude Include="src\window.hh" />
+    <ClInclude Include="src\word_db.hh" />
+    <ClInclude Include="src\word_splitter.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".vs\kakoune\v17\workspaceFileList.bin" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

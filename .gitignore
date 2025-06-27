@@ -4,6 +4,8 @@
 *.1-r
 .*.kak.*
 *.tar*
+*.vcxproj.user
+*.vcxproj.filters
 src/kak
 src/kak.debug
 src/kak.debug.*
@@ -17,3 +19,7 @@ tags
 GPATH
 GRTAGS
 GTAGS
+Kakoune
+.vs
+x64
+Debug

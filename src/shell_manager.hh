@@ -1,6 +1,7 @@
 #ifndef shell_manager_hh_INCLUDED
 #define shell_manager_hh_INCLUDED
 
+#include "hacks.hh"
 #include "array_view.hh"
 #include "env_vars.hh"
 #include "string.hh"
@@ -9,9 +10,11 @@
 #include "completion.hh"
 
 #include <signal.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
+#if !defined(_WIN32)
+#include <unistd.h>
+#include <sys/wait.h>
+#endif
 namespace Kakoune
 {
 

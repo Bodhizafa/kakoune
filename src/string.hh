@@ -31,16 +31,16 @@ public:
     using reverse_iterator = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     iterator begin() { return type().data(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const_iterator begin() const { return type().data(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     iterator end() { return type().data() + type().length(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const_iterator end() const { return type().data() + type().length(); }
 
     reverse_iterator rbegin() { return reverse_iterator{end()}; }
@@ -54,10 +54,10 @@ public:
     CharType& back() { return type().data()[(int)type().length() - 1]; }
     const CharType& back() const { return type().data()[(int)type().length() - 1]; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     CharType& operator[](ByteCount pos) { return type().data()[(int)pos]; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const CharType& operator[](ByteCount pos) const { return type().data()[(int)pos]; }
 
     Codepoint operator[](CharCount pos) const
@@ -66,7 +66,7 @@ public:
     CharCount char_length() const { return utf8::distance(begin(), end()); }
     ColumnCount column_length() const { return utf8::column_distance(begin(), end()); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     bool empty() const { return type().length() == 0_byte; }
 
     bool starts_with(StringView str) const;
@@ -89,9 +89,9 @@ public:
     StringView substr(ColumnCount from, ColumnCount length = -1) const;
 
 private:
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     Type& type() { return *static_cast<Type*>(this); }
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const Type& type() const { return *static_cast<const Type*>(this); }
 };
 
@@ -119,19 +119,19 @@ public:
 
     static String no_copy(StringView str);
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     char* data() { return m_data.data(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const char* data() const { return m_data.data(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     ByteCount length() const { return m_data.size(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     const char* c_str() const { return m_data.data(); }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     void append(const char* data, ByteCount count) { m_data.append(data, (size_t)count); }
 
     void clear() { m_data.clear(); }
@@ -158,10 +158,18 @@ public:
         using Alloc = Allocator<char, MemoryDomain::String>;
 
         Data() { set_empty(); }
-        Data(NoCopy, const char* data, size_t size) : u{Long{const_cast<char*>(data),
-                                                             size,
-                                                             /*capacity=*/0,
-                                                             /*mode=*/Long::active_mask}} {}
+        //Data(NoCopy, const char* data, size_t size) : u{Long{const_cast<char*>(data),
+        //                                                     size,
+        //                                                     /*capacity=*/0,
+        //                                                     /*mode=*/Long::active_mask}} {}
+        
+        Data(NoCopy, const char* data, size_t size)
+        {
+            u.l.ptr = const_cast<char*>(data);
+            u.l.size = size;
+            u.l.cm.capacity = 0;
+            u.l.cm.m.mode = Long::active_mask;
+        };
 
         Data(const char* data, size_t size, size_t capacity);
         Data(const char* data, size_t size) : Data(data, size, size) {}
@@ -172,9 +180,9 @@ public:
         Data& operator=(const Data& other);
         Data& operator=(Data&& other) noexcept;
 
-        bool is_long() const { return (u.l.mode & Long::active_mask) != 0; }
+        bool is_long() const { return (u.l.cm.m.mode & Long::active_mask) != 0; }
         size_t size() const { return is_long() ? u.l.size : (Short::capacity - u.s.remaining_size); }
-        size_t capacity() const { return is_long() ? u.l.capacity : Short::capacity; }
+        size_t capacity() const { return is_long() ? u.l.cm.capacity : Short::capacity; }
 
         const char* data() const { return is_long() ? u.l.ptr : u.s.string; }
         char* data() { return is_long() ? u.l.ptr : u.s.string; }
@@ -189,13 +197,19 @@ public:
     private:
         struct Long
         {
-            static constexpr size_t capacity_bits = CHAR_BIT * (sizeof(size_t) - 1);
+            static constexpr size_t capacity_bytes = sizeof(size_t) - 1;
+            static constexpr size_t capacity_bits = CHAR_BIT * capacity_bytes;
             static constexpr size_t max_capacity = ((size_t)1 << capacity_bits) - 1;
-
             char* ptr;
             size_t size;
-            size_t capacity : capacity_bits;
-            unsigned char mode;
+            union {
+                size_t capacity : capacity_bits;
+                struct {
+                    unsigned char padding[capacity_bytes];
+                    unsigned char mode;
+
+                } m;
+            } cm;
             static constexpr unsigned char active_mask = 0b1000'0000;
         };
         static_assert(sizeof(Long) == sizeof(char*) * 3);
@@ -209,18 +223,17 @@ public:
             // and not collide with Long::active_mask.
             unsigned char remaining_size;
         };
-        static_assert(offsetof(Long, mode) == offsetof(Short, remaining_size));
+        static_assert(offsetof(Long, cm.m.mode) == offsetof(Short, remaining_size));
 
         union
         {
             Long l;
             Short s;
         } u;
-
         void release()
         {
-            if (is_long() and (u.l.capacity != 0))
-                Alloc{}.deallocate(u.l.ptr, u.l.capacity+1);
+            if (is_long() and (u.l.cm.capacity != 0))
+                Alloc{}.deallocate(u.l.ptr, u.l.cm.capacity+1);
         }
 
         void set_empty() { u.s.remaining_size = Short::capacity; u.s.string[0] = '\0'; }
@@ -244,10 +257,10 @@ public:
     StringView(int c) = delete;
     StringView(Codepoint c) = delete;
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr const char* data() const { return m_data; }
 
-    [[gnu::always_inline]]
+    ALWAYS_INLINE
     constexpr ByteCount length() const { return m_length; }
 
     String str() const { return {m_data, m_length}; }
@@ -337,7 +350,7 @@ inline String operator+(StringView lhs, StringView rhs)
     return res;
 }
 
-[[gnu::always_inline]]
+ALWAYS_INLINE
 inline bool operator==(const StringView& lhs, const StringView& rhs)
 {
     return lhs.length() == rhs.length() and
