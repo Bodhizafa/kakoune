@@ -13,6 +13,8 @@ bool isatty(int a) {
 }
 // glibc uses 'mtim' ms uses 'mtime'
 #define st_mtim st_mtime
+#define st_mtim st_mtime
+#define st_mtim st_mtime
 
 #else
 
